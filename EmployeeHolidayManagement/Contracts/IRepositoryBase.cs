@@ -15,6 +15,10 @@ namespace EmployeeHolidayManagement.Contracts
         bool Delete(T entity);
         bool Create(T entity);
 
+        bool Exists(int id);
+
+        bool Exists(string name);
+
         bool Save();
     }
 }

@@ -27,6 +27,16 @@ namespace EmployeeHolidayManagement.Repository
             return Save();
         }
 
+        public bool Exists(int id)
+        {
+            return _db.LeaveTypes.Any(a => a.Id == id);
+        }
+
+        public bool Exists(string name)
+        {
+            return _db.LeaveTypes.Any(a => a.Name == name);
+        }
+
         public ICollection<LeaveType> FindAll()
         {
             return _db.LeaveTypes.ToList();

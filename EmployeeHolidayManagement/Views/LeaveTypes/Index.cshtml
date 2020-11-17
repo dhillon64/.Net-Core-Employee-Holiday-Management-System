@@ -1,0 +1,50 @@
+﻿@model IEnumerable<EmployeeHolidayManagement.Models.LeaveTypeVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Leave Types</h1>
+<hr/>
+<p>
+    <a class="btn btn-primary" asp-action="Create">
+        Create New <i class="fas fa-plus"></i></a>
+</p>
+<table id="tblData" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateCreated)
+            </th>
+            <th> Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreated)
+            </td>
+            <td>
+                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit <i class="far fa-edit"></i></a> |
+                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Details <i class="fas fa-info-circle"></i></a> |
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Are you sure you want to delete this record?')">Delete <i class="fas fa-trash"></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@section Scripts {
+<script>
+    $(document).ready(function () {
+        $('#tblData').DataTable();
+    });
+</script>
+}

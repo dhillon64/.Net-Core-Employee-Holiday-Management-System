@@ -28,6 +28,16 @@ namespace EmployeeHolidayManagement.Repository
             return Save();
         }
 
+        public bool Exists(int id)
+        {
+            return _db.LeaveHistories.Any(a => a.Id == id);
+        }
+
+        public bool Exists(string name)
+        {
+            throw new NotImplementedException();
+        }
+
         public ICollection<LeaveHistory> FindAll()
         {
             return _db.LeaveHistories.ToList();
