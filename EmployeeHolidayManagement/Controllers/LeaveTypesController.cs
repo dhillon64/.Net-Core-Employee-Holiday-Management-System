@@ -6,11 +6,13 @@ using AutoMapper;
 using EmployeeHolidayManagement.Contracts;
 using EmployeeHolidayManagement.Data;
 using EmployeeHolidayManagement.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeHolidayManagement.Controllers
 {
+    [Authorize(Roles ="Administrator")]
     public class LeaveTypesController : Controller
     {
         
@@ -23,7 +25,7 @@ namespace EmployeeHolidayManagement.Controllers
             _mapper = mapper;
             
         }
-
+        
         // GET: LeaveTypesController
         public ActionResult Index()
         {
