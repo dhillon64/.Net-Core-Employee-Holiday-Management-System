@@ -17,7 +17,7 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateCreated)
+                @Html.DisplayNameFor(model=>model.DefaultDays)
             </th>
             <th> Actions</th>
         </tr>
@@ -29,7 +29,7 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DateCreated)
+                @Html.DisplayFor(modelItem=>item.DefaultDays)
             </td>
             <td>
                 <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit <i class="far fa-edit"></i></a> |
@@ -41,10 +41,3 @@
     </tbody>
 </table>
 
-@section Scripts {
-<script>
-    $(document).ready(function () {
-        $('#tblData').DataTable();
-    });
-</script>
-}

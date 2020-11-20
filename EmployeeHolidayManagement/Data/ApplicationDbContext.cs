@@ -19,5 +19,8 @@ namespace EmployeeHolidayManagement.Data
         public DbSet<LeaveType> LeaveTypes { get; set; }
         public DbSet<LeaveHistory> LeaveHistories { get; set; }
         public DbSet<EmployeeHolidayManagement.Models.LeaveTypeVM> LeaveTypeVM { get; set; }
+        public DbSet<EmployeeHolidayManagement.Models.EmployeeVM> EmployeeVM { get; set; }
+        public DbSet<EmployeeHolidayManagement.Models.EditLeaveAllocationVM> EditLeaveAllocationVM { get; set; }
+        public DbSet<EmployeeHolidayManagement.Models.LeaveAllocationVM> LeaveAllocationVM { get; set; }
     }
 }

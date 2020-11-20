@@ -1,5 +1,6 @@
 ﻿using EmployeeHolidayManagement.Contracts;
 using EmployeeHolidayManagement.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,13 @@ namespace EmployeeHolidayManagement.Repository
         {
             _db = db;
         }
+
+        public bool CheckAllocation(int leaveTypeId, string employeeId)
+        {
+            var period = DateTime.Now.Year;
+            return FindAll().Where(a => a.EmployeeId == employeeId && a.LeaveTypeId == leaveTypeId && a.Period == period).Any();
+        }
+
         public bool Create(LeaveAllocation entity)
         {
             _db.LeaveAllocations.Add(entity);
@@ -40,12 +48,18 @@ namespace EmployeeHolidayManagement.Repository
 
         public ICollection<LeaveAllocation> FindAll()
         {
-            return _db.LeaveAllocations.ToList();
+            return _db.LeaveAllocations.Include(a => a.LeaveType).ToList();
         }
 
         public LeaveAllocation FindById(int Id)
         {
-            return _db.LeaveAllocations.FirstOrDefault(a => a.Id == Id);
+            return _db.LeaveAllocations.Include(a=>a.Employee).Include(a=>a.LeaveType).FirstOrDefault(a => a.Id == Id);
+        }
+
+        public ICollection<LeaveAllocation> GetLeaveAllocationsByEmployee(string id)
+        {
+            var period = DateTime.Now.Year;
+            return FindAll().Where(a => a.EmployeeId == id && a.Period==period).ToList();
         }
 
         public bool Save()
