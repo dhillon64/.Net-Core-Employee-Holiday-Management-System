@@ -56,10 +56,16 @@ namespace EmployeeHolidayManagement.Repository
             return _db.LeaveAllocations.Include(a=>a.Employee).Include(a=>a.LeaveType).FirstOrDefault(a => a.Id == Id);
         }
 
-        public ICollection<LeaveAllocation> GetLeaveAllocationsByEmployee(string id)
+        public ICollection<LeaveAllocation> GetLeaveAllocationsByEmployee(string employeeId)
         {
             var period = DateTime.Now.Year;
-            return FindAll().Where(a => a.EmployeeId == id && a.Period==period).ToList();
+            return FindAll().Where(a => a.EmployeeId == employeeId && a.Period==period).ToList();
+        }
+
+        public LeaveAllocation GetLeaveAllocationsByEmployeeAndType(string employeeId, int leaveTypeId)
+        {
+            var period = DateTime.Now.Year;
+            return FindAll().FirstOrDefault(a => a.EmployeeId == employeeId && a.Period == period&& a.LeaveTypeId==leaveTypeId);
         }
 
         public bool Save()

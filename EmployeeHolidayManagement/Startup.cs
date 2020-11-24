@@ -36,7 +36,7 @@ namespace EmployeeHolidayManagement
                     Configuration.GetConnectionString("DefaultConnection")));
             //Add references for repository and contracts to startup file
             services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
-            services.AddScoped<ILeaveHistoryRepository, LeaveHistoryRepository>();
+            services.AddScoped<ILeaveRequestRepository, LeaveRequestRepository>();
             services.AddScoped<ILeaveAllocationRepository, LeaveAllocationRepository>();
             services.AddAutoMapper(typeof(Maps));
             services.AddDefaultIdentity<Employee>()
