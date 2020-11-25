@@ -78,7 +78,7 @@
                 }
             </td>
             <td>
-                @if (item.StartDate > DateTime.Now || item.Approved == null)
+                @if (item.StartDate > DateTime.Now || item.Approved == true)
                 {
                 <a class="btn btn-danger" onclick="return confirm('Are you sure you want to cancel this Leave Request')" asp-action="CancelRequest" asp-route-id="@item.Id">
                 <i class="fas fa-trash"></i></a>

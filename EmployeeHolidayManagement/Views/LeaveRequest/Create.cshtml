@@ -1,4 +1,9 @@
-﻿@model EmployeeHolidayManagement.Models.CreateLeaveRequestVM
+﻿@using Microsoft.AspNetCore.Identity
+@using EmployeeHolidayManagement.Data
+@inject SignInManager<Employee> SignInManager
+@inject UserManager<Employee> UserManager
+
+@model EmployeeHolidayManagement.Models.CreateLeaveRequestVM
 
 @{
     ViewData["Title"] = "Create";
@@ -43,22 +48,32 @@
                     </div>
                 </div>
             </div>
-                <div class="form-group">
-                    <input type="submit" value="Request Leave" class="btn btn-primary" />
-                </div>
+            <div class="form-group">
+                <input type="submit" value="Request Leave" class="btn btn-primary" />
+            </div>
         </form>
     </div>
 </div>
+@if (User.IsInRole("Administrator"))
+{
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+}
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+else if (User.IsInRole("Employee"))
+{
+    <div>
+        <a asp-action="EmployeeIndex">Back to My Leave</a>
+    </div>
+
+}
 
 @section Scripts{
     <script>
-  $( function() {
-    $( ".datepicker" ).datepicker();
-  } );
+        $(function () {
+            $(".datepicker").datepicker();
+        });
     </script>
- }
+}
 

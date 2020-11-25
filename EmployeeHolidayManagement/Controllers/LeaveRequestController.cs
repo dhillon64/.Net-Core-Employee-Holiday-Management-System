@@ -217,14 +217,16 @@ namespace EmployeeHolidayManagement.Controllers
             string employeeId = _userManager.GetUserId(User);
 
             var leaveRequest = _leaveRequestRepo.FindById(id);
+            if (leaveRequest.Approved == true)
+            {
             var startDayOfLeave = leaveRequest.StartDate;
             var endDayOfLeave = leaveRequest.EndDate;
             int totalNumberOfDays = (int)(endDayOfLeave - startDayOfLeave).TotalDays;
             int leaveRequestId = leaveRequest.LeaveTypeId;
-
             var leaveAllocationForEmployee = _leaveAllocationRepo.GetLeaveAllocationsByEmployeeAndType(employeeId, leaveRequestId);
             leaveAllocationForEmployee.NumberOfDays += totalNumberOfDays;
             var updatedAllocationForUser = _leaveAllocationRepo.Update(leaveAllocationForEmployee);
+            }
 
             var requestDeleted = _leaveRequestRepo.Delete(leaveRequest);
 

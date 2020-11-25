@@ -1,8 +1,43 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@using EmployeeHolidayManagement.Data
+@inject SignInManager<Employee> SignInManager
+@inject UserManager<Employee> UserManager
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="card bg-dark text-center">
+    <img class="card-img" src="~/images/pexels-pixabay-534219.jpg" style="height:780px" alt="Card image">
+    <div class="card-img-overlay">
+        <h1 class="display-4 text-dark">Welcome</h1>
+        <h1 class="display-4 text-dark">Holiday Management System</h1>
+        <br />
+        @if (!SignInManager.IsSignedIn(User))
+        {
+            <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        }
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
+        {
+            <a asp-controller="LeaveRequest" asp-action="Index" class="btn btn-primary">
+                <i class="fas fa-cogs nav-icon"></i> Leave Requests
+            </a>
+            <a asp-controller="LeaveAllocation" asp-action="ListEmployees" class="btn btn-primary">
+                <i class="fas fa-users nav-icon"></i> Employees
+            </a>
+        }
+        else if (SignInManager.IsSignedIn(User) && User.IsInRole("Employee"))
+        {
+            <a asp-area="" asp-controller="LeaveRequest" asp-action="Create" class="btn btn-primary">
+                <i class="nav-icon fas fa-pen-alt"></i> Apply For Leave
+            </a>
+            <a asp-area="" asp-controller="LeaveRequest" asp-action="EmployeeIndex" class="btn btn-primary">
+                <i class="nav-icon fas fa-book-open"></i> My Leave
+                
+            </a>
+        }
+    </div>
 </div>
+
+
