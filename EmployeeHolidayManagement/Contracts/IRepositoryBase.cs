@@ -7,18 +7,16 @@ namespace EmployeeHolidayManagement.Contracts
 {
     public interface IRepositoryBase<T> where T : class
     {
-        ICollection<T> FindAll();
+        Task<ICollection<T>> FindAll();
 
-        T FindById(int Id);
+        Task<T> FindById(int Id);
 
-        bool Update(T entity);
-        bool Delete(T entity);
-        bool Create(T entity);
+        Task<bool> Update(T entity);
+        Task<bool> Delete(T entity);
+        Task<bool> Create(T entity);
 
-        bool Exists(int id);
+        Task<bool> Exists(int id);
 
-        bool Exists(string name);
-
-        bool Save();
+        Task<bool> Save();
     }
 }

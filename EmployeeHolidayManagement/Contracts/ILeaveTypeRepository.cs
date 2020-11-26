@@ -9,5 +9,7 @@ namespace EmployeeHolidayManagement.Contracts
     public interface ILeaveTypeRepository : IRepositoryBase<LeaveType>
     {
         ICollection<LeaveType> GetEmployeesByLeaveType(int Id);
+
+        Task<bool> Exists(string name);
     }
 }

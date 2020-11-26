@@ -27,9 +27,9 @@ namespace EmployeeHolidayManagement.Controllers
         }
         
         // GET: LeaveTypesController
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var objList = _repo.FindAll();
+            var objList = await _repo.FindAll();
             var objVm = new List<LeaveTypeVM>();
             foreach(var obj in objList)
             {
@@ -40,13 +40,14 @@ namespace EmployeeHolidayManagement.Controllers
         }
 
         // GET: LeaveTypesController/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            if (!_repo.Exists(id))
+            var isExists = await _repo.Exists(id);
+            if (!isExists)
             {
                 return NotFound();
             }
-            var obj = _repo.FindById(id);
+            var obj = await _repo.FindById(id);
             var objVm = _mapper.Map<LeaveTypeVM>(obj);
             return View(objVm);
         }
@@ -61,7 +62,7 @@ namespace EmployeeHolidayManagement.Controllers
         // POST: LeaveTypesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(LeaveTypeVM model)
+        public async Task<ActionResult> Create(LeaveTypeVM model)
         {
             try
             {
@@ -70,15 +71,15 @@ namespace EmployeeHolidayManagement.Controllers
                     return View(model);
 
                 }
-                
-                if (_repo.Exists(model.Name))
+                var exists = await _repo.Exists(model.Name);
+                if (exists)
                 {
                     ModelState.AddModelError("", "This LeaveType has already been created");
                     return View(model);
                 }
                 var obj = _mapper.Map<LeaveType>(model);
                 obj.DateCreated = DateTime.Now;
-                var leaveTypeCreated = _repo.Create(obj);
+                var leaveTypeCreated = await _repo.Create(obj);
                 if (!leaveTypeCreated)
                 {
                     ModelState.AddModelError("", "Something went wrong....");
@@ -95,13 +96,14 @@ namespace EmployeeHolidayManagement.Controllers
         }
 
         // GET: LeaveTypesController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            if (!_repo.Exists(id))
+            var exists = await _repo.Exists(id);
+            if (!exists)
             {
                 return NotFound();
             }
-            var obj = _repo.FindById(id);
+            var obj =await _repo.FindById(id);
             var objVm = _mapper.Map<LeaveTypeVM>(obj);
 
             return View(objVm);
@@ -110,7 +112,7 @@ namespace EmployeeHolidayManagement.Controllers
         // POST: LeaveTypesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(LeaveTypeVM model)
+        public async Task<ActionResult> Edit(LeaveTypeVM model)
         {
             try
             {
@@ -119,7 +121,7 @@ namespace EmployeeHolidayManagement.Controllers
                     return View();
                 }
                 var obj = _mapper.Map<LeaveType>(model);
-                var updateSuccess = _repo.Update(obj);
+                var updateSuccess =await _repo.Update(obj);
                 if (!updateSuccess)
                 {
                     ModelState.AddModelError("", "Something went wrong");
@@ -135,7 +137,7 @@ namespace EmployeeHolidayManagement.Controllers
         }
 
         // GET: LeaveTypesController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             /*if (!_repo.Exists(id))
             {
@@ -146,13 +148,13 @@ namespace EmployeeHolidayManagement.Controllers
 
             return View(objVm);*/
 
-            var obj = _repo.FindById(id);
+            var obj = await _repo.FindById(id);
             if (obj == null)
             {
                 return NotFound();
             }
 
-            var Deleted = _repo.Delete(obj);
+            var Deleted = await _repo.Delete(obj);
             if (!Deleted)
             {
                 return BadRequest();
@@ -165,17 +167,17 @@ namespace EmployeeHolidayManagement.Controllers
         // POST: LeaveTypesController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id,LeaveTypeVM model)
+        public async Task<ActionResult> Delete(int id,LeaveTypeVM model)
         {
             try
             {
-                var obj = _repo.FindById(id);
+                var obj = await _repo.FindById(id);
                 if (obj == null)
                 {
                     return NotFound();
                 }
 
-                var Deleted=_repo.Delete(obj);
+                var Deleted=await _repo.Delete(obj);
                 if (!Deleted)
                 {
                     return View(model);
