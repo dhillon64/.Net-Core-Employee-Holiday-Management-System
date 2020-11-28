@@ -132,6 +132,7 @@ namespace EmployeeHolidayManagement.Controllers
             {
                 var startDate = Convert.ToDateTime(model.StartDate);
                 var endDate = Convert.ToDateTime(model.EndDate);
+
                 var leaveTypes =await _leaveTypeRepo.FindAll();
                 var leaveTypesItems = leaveTypes.Select(q => new SelectListItem
                 {
@@ -145,6 +146,7 @@ namespace EmployeeHolidayManagement.Controllers
                     
                     return View(model);
                 }
+                
 
                 if (DateTime.Compare(startDate, endDate) > 0)
                 {

@@ -65,9 +65,10 @@ namespace EmployeeHolidayManagement.Models
         [Required]
         [Display(Name = "End Date")]
         public string EndDate { get; set; }
-        [Required]
+        
         [Display(Name ="Leave Type")]
         public IEnumerable<SelectListItem> LeaveTypes { get; set; }
+        [Required]
         [Display(Name ="Leave Type")]
         public int LeaveTypeId { get; set; }
         [Display(Name ="Comments")]

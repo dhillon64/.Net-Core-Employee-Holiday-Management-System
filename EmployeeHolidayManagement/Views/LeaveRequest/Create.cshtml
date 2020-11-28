@@ -72,7 +72,8 @@ else if (User.IsInRole("Employee"))
 @section Scripts{
     <script>
         $(function () {
-            $(".datepicker").datepicker();
+            $(".datepicker").datepicker({
+                dateFormat: "dd-mm-yy"});
         });
     </script>
 }
