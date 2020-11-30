@@ -1,5 +1,12 @@
 # .Net-Core-Employee-Holiday-Management-System
-I have Created a Holiday management system, were employees can apply for leave, check the allocation of leave days they have left and check on the status of their leave requests. An admin user can then log in and see all leave requests from employees and choose to approve/reject the request and also allocate a certain number of leave days to certain employees. This App was Created using .NET core 3.1 MVC along with SQL server and Entity FW core. App has been published on Azure.
+I have Created a Holiday management system, were employees can apply for leave, check the allocation of leave days they have left and check on the status of their leave requests. An admin user can then log in and see all leave requests from employees and choose to approve/reject the request and also allocate a certain number of leave days to certain employees. This App was Created using .NET core 3.1 MVC along with SQL server and Entity FW core. App has been published on Azure.                                                  
+log-in details for app:
+Admin:
+admin@localhost.com
+password:Password1!
+Employee:
+user1@test.com
+password:Password1!
 
 ![screencapture-localhost-44384-2020-11-29-12_14_04](https://user-images.githubusercontent.com/67638060/100542010-845dcb80-323f-11eb-8f45-1f3e88cec710.png)
 
